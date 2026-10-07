@@ -1,7 +1,6 @@
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-BASE_DIR = Path(__file__).resolve().parent
-from pathlib import Path
 from pypdf import PdfReader
 import os
 import json
@@ -9,6 +8,7 @@ import time
 from dotenv import load_dotenv
 from groq import Groq
 from pydantic import BaseModel, Field
+BASE_DIR = Path(__file__).resolve().parent
 
 
 load_dotenv()
