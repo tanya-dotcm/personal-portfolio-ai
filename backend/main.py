@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+BASE_DIR = Path(__file__).resolve().parent
 from pathlib import Path
 from pypdf import PdfReader
 import os
@@ -163,7 +164,7 @@ def read_pdf(file_path):
 
 @app.get("/")
 def home():
-    resume_text = read_pdf(Path("RESUME2K26.pdf"))
+    resume_text = read_pdf(BASE_DIR / "RESUME2K26.pdf")
     resume = parse_resume(resume_text)
     print(resume.model_dump_json(indent=2))
     return{
@@ -173,7 +174,7 @@ def home():
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    resume_text = read_pdf(Path("RESUME2K26.pdf"))
+    resume_text = read_pdf(BASE_DIR / "RESUME2K26.pdf")
     resume = parse_resume(resume_text)
     answer = ask_candidate(request.question, resume)
     return {
