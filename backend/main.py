@@ -167,7 +167,7 @@ def read_pdf(file_path):
 
 @app.get("/")
 def home():
-    resume_text = read_pdf(BASE_DIR / "RESUME2K26.pdf")
+    resume_text = ""
     resume = parse_resume(resume_text)
     print(resume.model_dump_json(indent=2))
     return{
