@@ -167,7 +167,7 @@ def read_pdf(file_path):
 
 @app.get("/")
 def home():
-    resume_text = ""
+    resume_text = read_pdf(BASE_DIR / "RESUME2K26.pdf")
     resume = parse_resume(resume_text)
     print(resume.model_dump_json(indent=2))
     return{
@@ -177,25 +177,7 @@ def home():
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    resume_text = ""
-    resume_text = """
-    Tanya is a recent B.Tech Computer Science and Engineering graduate.
-    Technical skills:
-- Python
-- JavaScript
-- HTML
-- CSS
-- React
-- FastAPI
-- SQL
-- Large Language Models (LLMs)
-- Prompt Engineering
-- Git and GitHub
-
-Projects:
-- Personal Portfolio AI: an AI-powered portfolio with a React frontend,
-  FastAPI backend, and Groq integration.
-"""
+    resume_text = read_pdf(BASE_DIR / "RESUME2K26.pdf")
     resume = parse_resume(resume_text)
     answer = ask_candidate(request.question, resume)
     return {
